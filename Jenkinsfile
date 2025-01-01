@@ -4,12 +4,12 @@ pipeline {
     environment {
         // Spécifiez la version de Java à utiliser
         JAVA_HOME = 'C:\\Program Files\\Java\\jdk-17'
-        PATH = "${JAVA_HOME}\\bin;${env.PATH}"
         MAVEN_HOME = 'C:\\apache-maven-3.8.1'
-        PATH = "${MAVEN_HOME}\\bin;${env.PATH}"
+        // Fusionner les deux modifications de PATH
+        PATH = "${JAVA_HOME}\\bin;${MAVEN_HOME}\\bin;${env.PATH}"
     }
 
-    stages { // Le bloc 'stages' doit inclure toutes les étapes
+    stages {
         stage('Clone Repository') {
             steps {
                 // Cloner le dépôt Git contenant le projet
