@@ -9,13 +9,12 @@ pipeline {
         PATH = "${MAVEN_HOME}\\bin;${env.PATH}"
     }
 
-    stages {
-        stage('Clone Repository') {
-            steps {
-                // Cloner le dépôt Git contenant le projet
-                git 'https://github.com/Wissalllll/ProjetCalculatrice.git'
-            }
-        }
+ stage('Clone Repository') {
+    steps {
+        // Cloner le dépôt Git contenant le projet
+        git branch: 'main', url: 'https://github.com/Wissalllll/ProjetCalculatrice.git'
+    }
+}
 
         stage('Build') {
             steps {
