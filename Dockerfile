@@ -1,25 +1,25 @@
-# Étape 1: Choisir l'image de base pour le build de l'application Java
+# Étape 1
 FROM maven:3.8.4-openjdk-8-slim AS builder
 WORKDIR /app
 COPY . .
 RUN mvn clean package
 
-# Étape 2: Choisir l'image de base pour l'application Node.js
+# Étape 2
 FROM node:16 AS node_builder
 
-# Étape 3: Définir le répertoire de travail pour l'application Node.js
+# Étape 3
 WORKDIR /app
 
-# Étape 4: Copier les fichiers de l'application Node.js dans le conteneur
+# Étape 4
 COPY . .
 
-# Étape 5: Installer les dépendances Node.js
+# Étape 5
 RUN npm install
 
-# Étape 6: Exposer le port pour l'application Node.js
+# Étape 6
 EXPOSE 3000
 
-# Étape 7: Choisir l'image d'exécution pour Java
+# Étape 7
 FROM openjdk:8-jre-slim AS java_runtime
 
 # Copier le fichier JAR de l'étape de construction Java
@@ -27,7 +27,7 @@ WORKDIR /app
 COPY --from=builder /app/target/CalculatorProject-1.0-SNAPSHOT.jar calculator.jar
 ENTRYPOINT ["java", "-jar", "calculator.jar"]
 
-# Étape 8: Configuration d'exécution pour l'application Node.js
+# Étape 8
 FROM node:16 AS node_runtime
 
 # Définir le répertoire de travail
