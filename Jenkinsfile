@@ -2,32 +2,15 @@ pipeline {
     agent any
 
     stages {
-        // Étape de Build
         stage('Build') {
             steps {
-                echo 'Starting Build Stage'
-                sh 'mvn clean package' // Compile et package le projet
+                sh 'mvn clean package'
             }
         }
-
-        // Étape de Test Unitaire
-        stage('Unit Tests') {
+        stage('Test') {
             steps {
-                echo 'Running Unit Tests'
-                sh 'mvn test' // Exécute les tests unitaires
+                sh 'mvn test'
             }
-        }
-    }
-
-    post {
-        always {
-            echo 'Pipeline execution completed.'
-        }
-        success {
-            echo 'Pipeline executed successfully.'
-        }
-        failure {
-            echo 'Pipeline failed. Check the logs for details.'
         }
     }
 }
